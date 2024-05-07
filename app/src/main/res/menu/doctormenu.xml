@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/dochome"
+        android:title="Home">
+    </item>
+    <item android:id="@+id/reqdoctor"
+        android:title="User requests">
+    </item>
+    <item android:id="@+id/chatwithai"
+        android:title="Aichat">
+    </item>
+
+    <item android:id="@+id/doctorprofile"
+        android:title="Profile"
+        >
+
+    </item>
+</menu>

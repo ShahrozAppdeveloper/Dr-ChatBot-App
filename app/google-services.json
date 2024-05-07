@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "177783226271",
+    "firebase_url": "https://doctorapp-5b63c-default-rtdb.firebaseio.com",
+    "project_id": "doctorapp-5b63c",
+    "storage_bucket": "doctorapp-5b63c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177783226271:android:79864d56caa93d5a5847aa",
+        "android_client_info": {
+          "package_name": "com.example.doctorchatbotapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEAbqmVch_XefowXPzgfBo0UudkKBB5ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

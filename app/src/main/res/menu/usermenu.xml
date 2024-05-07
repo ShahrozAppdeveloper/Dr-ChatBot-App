@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Home">
+    </item>
+    <item android:id="@+id/doctor"
+        android:title="Available Doctor">
+    </item>
+    <item android:id="@+id/bookdoctor"
+        android:title="Booked Doctor">
+    </item>
+    <item android:id="@+id/chatwithai"
+        android:title="Aichat">
+    </item>
+
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        >
+
+    </item>
+</menu>

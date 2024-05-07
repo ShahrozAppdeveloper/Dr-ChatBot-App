@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/home"
+        android:title="Home">
+    </item>
+    <item android:id="@+id/AddProduct"
+        android:title="Add Product">
+    </item>
+    <item android:id="@+id/viewAllProduct"
+        android:title="Booked Doctor">
+    </item>
+    <item android:id="@+id/bookedproduct"
+        android:title="Booked Product">
+    </item>
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        >
+
+    </item>
+</menu>

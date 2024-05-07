@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/adminhome"
+        android:title="Home">
+    </item>
+    <item android:id="@+id/admindoctorlist"
+        android:title="Doctor">
+    </item>
+    <item android:id="@+id/adminuserlist"
+        android:title="User">
+    </item>
+    <item android:id="@+id/adminprofile"
+        android:title="Profile"
+        >
+    </item>
+</menu>
