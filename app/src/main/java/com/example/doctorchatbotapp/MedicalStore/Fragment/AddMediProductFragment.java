@@ -76,7 +76,13 @@ public class AddMediProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentAddMediProductBinding.inflate(getLayoutInflater(),container,false);
-         binding.uploadProductInfoButton.setOnClickListener(new View.OnClickListener() {
+        binding.circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCamera();
+            }
+        });
+        binding.uploadProductInfoButton.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  productname = binding.username.getText().toString();
@@ -173,8 +179,8 @@ public class AddMediProductFragment extends Fragment {
 
         if (user != null) {
             String userID = user.getUid().toString();
-            String productID = reference.push().getKey().toString();
             reference = database.getReference("Admin Product").child("Product Details");
+            String productID = reference.push().getKey().toString();
 
             AddProdcutDetails obj = new AddProdcutDetails(userID, productID, productname,url,Productprice);
             reference.child(productID).setValue(obj).addOnCompleteListener(new OnCompleteListener<Void>() {

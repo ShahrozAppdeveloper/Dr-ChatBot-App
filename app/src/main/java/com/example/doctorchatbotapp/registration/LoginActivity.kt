@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.doctorchatbotapp.Admin.AdminDashboardActivity
 import com.example.doctorchatbotapp.Admin.AdminProfileActivity
 import com.example.doctorchatbotapp.Doctor.DoctorProfileActivity
+import com.example.doctorchatbotapp.MedicalStore.MedicalDashboardActivity
 import com.example.doctorchatbotapp.ModelClass.CurrentStatusDetails
 import com.example.doctorchatbotapp.SharedPrefPkg.PrefManager
 import com.example.doctorchatbotapp.User.UserProfileActivity
@@ -94,6 +95,9 @@ class LoginActivity : AppCompatActivity() {
                                     }
                                     "Doctor" -> {
                                         startActivity(Intent(applicationContext, DoctorProfileActivity::class.java))
+                                    }
+                                    "Medical" -> {
+                                        startActivity(Intent(applicationContext, MedicalDashboardActivity::class.java))
                                     }
                                     else -> {
                                         Toast.makeText(this@LoginActivity, "Unknown User Type", Toast.LENGTH_SHORT).show()

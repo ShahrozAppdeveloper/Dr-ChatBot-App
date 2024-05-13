@@ -58,7 +58,8 @@ public class ReqUserToDoctorAdapter extends RecyclerView.Adapter<ReqUserToDoctor
             public void onClick(View v) {
                 String memberID = data.getUserID();
                 String ReqID = data.getReqID();
-                AcceptTrainnerRequest(currentuserID,memberID,ReqID);
+//                Toast.makeText(context, ""+memberID, Toast.LENGTH_SHORT).show();
+                AcceptDoctorRequest(currentuserID,memberID,ReqID);
             }
         });
         holder.imageFalse.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +72,7 @@ public class ReqUserToDoctorAdapter extends RecyclerView.Adapter<ReqUserToDoctor
         });
 
     }
-    private void AcceptTrainnerRequest(String trainnerID,String userID,String reqID){
+    private void AcceptDoctorRequest(String trainnerID,String userID,String reqID){
         reftrainneraccept = database.getReference("DoctorBooking")
                 .child("Info")
                 .child(trainnerID).

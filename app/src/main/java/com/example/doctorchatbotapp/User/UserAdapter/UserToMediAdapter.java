@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,15 +45,16 @@ public class UserToMediAdapter extends RecyclerView.Adapter<UserToMediAdapter.Te
                 .into(holder.userImg);
         holder.username.setText(data.getProductname());
         holder.tvprice.setText(data.getProductprice());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent obj = new Intent(context, UserViewMedicalInfoActivity.class);
                 obj.putExtra("productID",data.getProductID());
-                obj.putExtra("productimage",data.getProductID());
-                obj.putExtra("productname",data.getProductID());
+                obj.putExtra("productimage",data.getProductimage());
+                obj.putExtra("productname",data.getProductname());
                 obj.putExtra("productprice",data.getProductprice());
                 obj.putExtra("ownerID",data.getUserID());
+                context.startActivity(obj);
             }
         });
 
@@ -66,6 +68,7 @@ public class UserToMediAdapter extends RecyclerView.Adapter<UserToMediAdapter.Te
     class TeacherStudentListViewHolder extends RecyclerView.ViewHolder {
         ImageView userImg;
         TextView username,tvprice;
+        CardView cardView;
 
         public TeacherStudentListViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +76,7 @@ public class UserToMediAdapter extends RecyclerView.Adapter<UserToMediAdapter.Te
             userImg = itemView.findViewById(R.id.userimageID);
             username = itemView.findViewById(R.id.userameText);
             tvprice= itemView.findViewById(R.id.textView7);
+            cardView = itemView.findViewById(R.id.cardviewID);
 
         }
     }

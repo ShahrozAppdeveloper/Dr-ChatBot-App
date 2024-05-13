@@ -121,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_marginTop="6dp"
+                android:visibility="gone"
                 android:background="@drawable/add_more_button_shape"
                 android:text="Add More Items"
                 android:textAllCaps="false"

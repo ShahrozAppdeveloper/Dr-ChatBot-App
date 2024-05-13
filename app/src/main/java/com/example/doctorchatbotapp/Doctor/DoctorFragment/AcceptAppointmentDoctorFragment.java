@@ -79,9 +79,8 @@ public class AcceptAppointmentDoctorFragment extends Fragment {
                                             AddRequserDetailsToDatabase userDetail = snapshot.getValue(AddRequserDetailsToDatabase.class);
                                             if (userDetail != null) {
                                                 String username = userDetail.getUsername();
-                                                String userID = userDetail.getUserID();
                                                 String userImage = userDetail.getImageurl();
-                                                list.add(new AddRequserDetailsToDatabase(userID,username,userImage,reqID));
+                                                list.add(new AddRequserDetailsToDatabase(userId,username,userImage,reqID));
 
                                             }
                                             adapter.notifyDataSetChanged();

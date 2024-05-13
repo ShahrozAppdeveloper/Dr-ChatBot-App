@@ -33,7 +33,7 @@
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginTop="10dp"
-           android:text="Medicane Details"
+           android:text="Medicine Details"
            android:textColor="@color/goButtonGreen"
            android:textSize="30dp"
            android:textStyle="bold"

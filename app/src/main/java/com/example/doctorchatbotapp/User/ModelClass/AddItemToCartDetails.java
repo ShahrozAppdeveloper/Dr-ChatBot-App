@@ -1,17 +1,29 @@
 package com.example.doctorchatbotapp.User.ModelClass;
 
-public class AddItemToCartDetails {
-    String ownerID,productId,productImage,productname,productprice;
+import java.io.Serializable;
+
+public class AddItemToCartDetails implements Serializable {
+    String UserID,ownerID,productId,productImage,productname,productprice,productquantity;
 
     public AddItemToCartDetails() {
     }
 
-    public AddItemToCartDetails(String ownerID, String productId, String productImage, String productname, String productprice) {
+    public AddItemToCartDetails(String userID, String ownerID, String productId, String productImage, String productname, String productprice, String productquantity) {
+        UserID = userID;
         this.ownerID = ownerID;
         this.productId = productId;
         this.productImage = productImage;
         this.productname = productname;
         this.productprice = productprice;
+        this.productquantity = productquantity;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 
     public String getOwnerID() {
@@ -52,5 +64,13 @@ public class AddItemToCartDetails {
 
     public void setProductprice(String productprice) {
         this.productprice = productprice;
+    }
+
+    public String getProductquantity() {
+        return productquantity;
+    }
+
+    public void setProductquantity(String productquantity) {
+        this.productquantity = productquantity;
     }
 }

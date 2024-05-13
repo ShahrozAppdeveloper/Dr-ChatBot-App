@@ -29,9 +29,9 @@ public class UserViewMedicalInfoActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Intent intent = getIntent();
         productID = intent.getStringExtra("productID");
-        productName = intent.getStringExtra("productName");
-        productImage = intent.getStringExtra("productImage");
-        productPrice = intent.getStringExtra("productPrice");
+        productName = intent.getStringExtra("productname");
+        productImage = intent.getStringExtra("productimage");
+        productPrice = intent.getStringExtra("productprice");
         ownerID = intent.getStringExtra("ownerID");
 
         savedCount = Integer.parseInt(productPrice);
