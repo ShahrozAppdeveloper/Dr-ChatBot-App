@@ -66,7 +66,7 @@ public class BookedProductFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 }else{
                     binding.progressB.setVisibility(View.GONE);
-                    Toast.makeText(requireActivity(), "no Medicane found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireActivity(), "no Medicine found", Toast.LENGTH_SHORT).show();
                 }
             }
 

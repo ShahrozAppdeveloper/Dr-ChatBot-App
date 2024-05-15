@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.doctorchatbotapp.Admin.AdminDashboardActivity
-import com.example.doctorchatbotapp.Admin.AdminProfileActivity
 import com.example.doctorchatbotapp.Doctor.DoctorProfileActivity
 import com.example.doctorchatbotapp.MedicalStore.MedicalDashboardActivity
 import com.example.doctorchatbotapp.ModelClass.CurrentStatusDetails
@@ -88,15 +87,23 @@ class LoginActivity : AppCompatActivity() {
                             currentStatusDetails?.let { details ->
                                 when (details.currentstatus) {
                                     "Admin" -> {
+                                        prefManager!!.currentstatus = "Admin"
+                                        prefManager!!.userID = userId
                                         startActivity(Intent(applicationContext, AdminDashboardActivity::class.java))
                                     }
                                     "Patient" -> {
+                                        prefManager!!.currentstatus = "Patient"
+                                        prefManager!!.userID = userId
                                         startActivity(Intent(applicationContext, UserProfileActivity::class.java))
                                     }
                                     "Doctor" -> {
+                                        prefManager!!.currentstatus = "Doctor"
+                                        prefManager!!.userID = userId
                                         startActivity(Intent(applicationContext, DoctorProfileActivity::class.java))
                                     }
                                     "Medical" -> {
+                                        prefManager!!.currentstatus = "Medical"
+                                        prefManager!!.userID = userId
                                         startActivity(Intent(applicationContext, MedicalDashboardActivity::class.java))
                                     }
                                     else -> {

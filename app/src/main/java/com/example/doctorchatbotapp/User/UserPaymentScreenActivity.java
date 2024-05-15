@@ -173,6 +173,8 @@ public class UserPaymentScreenActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete()) {
+                           DatabaseReference refmed = database.getReference("OwnerMedicine").child("Details").child(ownverID);
+                            refmed.child(productID).setValue(obj2);
                             DeleteItems();
                             startActivity(new Intent(getApplicationContext(), PaymentAnimationsActivity.class));
                             uploadPaymentDetails(fullName, bankName, cardNumber, securityCode, address, phoneNumber);

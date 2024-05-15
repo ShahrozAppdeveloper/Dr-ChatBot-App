@@ -14,17 +14,18 @@ import androidx.annotation.ColorRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.doctorchatbotapp.Admin.AdminDashboardActivity
+import com.example.doctorchatbotapp.Doctor.DoctorProfileActivity
+import com.example.doctorchatbotapp.MedicalStore.MedicalDashboardActivity
 import com.example.doctorchatbotapp.ModelClass.CurrentStatusDetails
 import com.example.doctorchatbotapp.SharedPrefPkg.PrefManager
+import com.example.doctorchatbotapp.User.UserProfileActivity
 import com.example.doctorchatbotapp.databinding.ActivitySignupBinding
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var tvlogin: TextView
@@ -177,29 +178,27 @@ class SignupActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if (uid != null) {
-            val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val ref: DatabaseReference =
-                firebaseDatabase.getReference("Dr Chatbot App").child("Account Details")
-                    .child(uid!!)
-            ref.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        val obj: CurrentStatusDetails? =
-                            snapshot.getValue(CurrentStatusDetails::class.java)
-                        currentUser = obj?.currentstatus!!
-                        val intent = Intent(applicationContext, FillYourProfileActivity::class.java)
-                        intent.putExtra("Status", currentUser)
-                        startActivity(intent)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@SignupActivity, "Error$error", Toast.LENGTH_SHORT).show()
-                }
-            })
-        } else {
+        val prefManager1 = PrefManager(applicationContext)
+        if (prefManager1.currentstatus.equals("Doctor")) {
+            //step 1.
+            val intent = Intent(applicationContext, DoctorProfileActivity ::class.java)
+            startActivity(intent)
+        } else if (prefManager1.currentstatus.equals("Patient")) {
+            val intent = Intent(applicationContext, UserProfileActivity::class.java)
+            startActivity(intent)
+        } else if (prefManager1.currentstatus.equals("Medical")) {
+            val intent = Intent(applicationContext, MedicalDashboardActivity::class.java)
+            startActivity(intent)
+        } else if (prefManager1.currentstatus.equals("Admin")) {
+            val intent = Intent(applicationContext, AdminDashboardActivity::class.java)
+            startActivity(intent)
         }
+        // step 2
+//        }else if (prefManager1.getCurrentstatus().equals("Admin")){
+//            //step 2
+//            Intent intent=new Intent(getApplicationContext(), AdminDashboard.class);
+//            startActivity(intent);
+//        }
     }
     override fun onBackPressed() {
         alertDialog.show()

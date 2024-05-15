@@ -3,9 +3,7 @@
     <item android:id="@+id/home"
         android:title="Home">
     </item>
-    <item android:id="@+id/AddProduct"
-        android:title="Add Product">
-    </item>
+
     <item android:id="@+id/viewAllProduct"
         android:title="Booked Doctor">
     </item>

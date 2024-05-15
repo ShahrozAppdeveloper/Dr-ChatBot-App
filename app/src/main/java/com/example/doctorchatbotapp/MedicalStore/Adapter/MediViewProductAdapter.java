@@ -14,15 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.doctorchatbotapp.MedicalStore.MediModelClass.AddProdcutDetails;
 import com.example.doctorchatbotapp.R;
+import com.example.doctorchatbotapp.User.ModelClass.ConfrimCartDetails;
 
 
 import java.util.ArrayList;
 
 public class MediViewProductAdapter extends RecyclerView.Adapter<MediViewProductAdapter.AdminViewProductViewHolder>{
-    private ArrayList<AddProdcutDetails> list;
+    private ArrayList<ConfrimCartDetails> list;
     private Context context;
 
-    public MediViewProductAdapter(ArrayList<AddProdcutDetails> list, Context context) {
+    public MediViewProductAdapter(ArrayList<ConfrimCartDetails> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -36,21 +37,13 @@ public class MediViewProductAdapter extends RecyclerView.Adapter<MediViewProduct
 
     @Override
     public void onBindViewHolder(@NonNull AdminViewProductViewHolder holder, int position) {
-        final AddProdcutDetails data = list.get(position);
+        final ConfrimCartDetails data = list.get(position);
 
-        Glide.with(context).load(data.getProductimage()).into(holder.productImg);
-        holder.productName.setText(data.getProductname());
-        holder.productPrice.setText(data.getProductprice());
+        Glide.with(context).load(data.getImage()).into(holder.productImg);
+        holder.productName.setText(data.getName());
+        holder.productPrice.setText(data.getPrice());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                context.startActivity(new Intent(context, AdminUpdateProductActivity.class)
-//                        .putExtra("productList",list)
-//                        .putExtra("position", position));
 
-            }
-        });
 
     }
 
@@ -61,13 +54,13 @@ public class MediViewProductAdapter extends RecyclerView.Adapter<MediViewProduct
 
     class AdminViewProductViewHolder extends RecyclerView.ViewHolder{
         ImageView productImg;
-        TextView productName, productPrice, productQuantity;
+        TextView productName, productPrice;
         public AdminViewProductViewHolder(@NonNull View itemView) {
             super(itemView);
 
             productImg = itemView.findViewById(R.id.enrolledTeacherImg);
-            productName = itemView.findViewById(R.id.enrolledTeacherName);
-            productPrice = itemView.findViewById(R.id.enrolledTeacherSchoolId);
+            productName = itemView.findViewById(R.id.nameID);
+            productPrice = itemView.findViewById(R.id.textView8);
 
         }
     }

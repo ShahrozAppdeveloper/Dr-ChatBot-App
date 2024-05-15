@@ -16,8 +16,11 @@ import android.widget.Toast;
 import com.example.doctorchatbotapp.MedicalStore.Adapter.MediViewProductAdapter;
 import com.example.doctorchatbotapp.MedicalStore.MediModelClass.AddProdcutDetails;
 import com.example.doctorchatbotapp.R;
+import com.example.doctorchatbotapp.User.ModelClass.ConfrimCartDetails;
 import com.example.doctorchatbotapp.databinding.FragmentAddMediProductBinding;
 import com.example.doctorchatbotapp.databinding.FragmentViewAllProductBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,9 +35,9 @@ public class ViewAllProductFragment extends Fragment {
     private FragmentViewAllProductBinding binding;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    ArrayList<AddProdcutDetails> list;
-    ArrayList<AddProdcutDetails> filteredUserList;
+    ArrayList<ConfrimCartDetails> list;
     MediViewProductAdapter adapter;
+    private String userID;
     public ViewAllProductFragment() {
         // Required empty public constructor
     }
@@ -46,76 +49,47 @@ public class ViewAllProductFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentViewAllProductBinding.inflate(getLayoutInflater(),container,false);
-        database = FirebaseDatabase.getInstance();
-
         list = new ArrayList<>();
-        filteredUserList = new ArrayList<>();
-        adapter = new MediViewProductAdapter(filteredUserList,requireContext());
 
-        binding.viewAllProductsRecyclerView.setAdapter(adapter);
-        binding.viewAllProductsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            userID = currentUser.getUid();
+            Toast.makeText(requireActivity(), ""+userID, Toast.LENGTH_SHORT).show();
+            getData(userID);
+            adapter = new MediViewProductAdapter(list,requireActivity());
 
-        getData();
-        filteredUserList.addAll(list);
-        binding.searchViewUsersList.setQueryHint("Search Product");
-        binding.searchViewUsersList.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+            binding.viewAllProductsRecyclerView.setAdapter(adapter);
+            binding.viewAllProductsRecyclerView.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterUsers(newText);
-                return true;
-            }
-        });
 
         return binding.getRoot();
     }
 
-    private void filterUsers(String searchText) {
-        filteredUserList.clear();
 
-        if (TextUtils.isEmpty(searchText)) {
-            // If search text is empty, show all items
-            filteredUserList.addAll(list);
-        } else {
-            // Filter by user name or email
-            for (AddProdcutDetails user : list) {
-                if (user.getProductname().toLowerCase().contains(searchText.toLowerCase())
-                        || user.getProductprice().toLowerCase().contains(searchText.toLowerCase())) {
-                    filteredUserList.add(user);
-                }
-            }
-        }
 
-        adapter.notifyDataSetChanged();
-    }
+    // ViewAllProductFragment.java
+    private void getData(String userID){
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("OwnerMedicine").child("Details");
 
-    private void getData(){
-        reference = database.getReference("Medi Product").child("Product Details");
-
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        AddProdcutDetails details = snapshot1.getValue(AddProdcutDetails.class);
+                        ConfrimCartDetails details = snapshot1.getValue(ConfrimCartDetails.class);
                         if (details != null){
                             list.add(details);
-                            adapter.notifyDataSetChanged();
                         } else {
-
+                            Toast.makeText(requireActivity(), "", Toast.LENGTH_SHORT).show();
+                            // Handle the case when data is null
                         }
                     }
-                    filteredUserList.addAll(list);
-                    adapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged(); // Move this line outside the loop to avoid redundant calls
                 } else {
-
+                    // Handle the case when snapshot does not exist
                 }
-
-                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -123,8 +97,6 @@ public class ViewAllProductFragment extends Fragment {
                 Toast.makeText(requireContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
     }
+
 }

@@ -43,15 +43,13 @@ public class MedicalDashboardActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(R.color.holdButtonGreen));
 
         bottomNavigationView = findViewById(R.id.medicalbottomNavigationView);
-        ChangeFragment(new MedicalHomeFragment());
+        ChangeFragment(new AddMediProductFragment());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menuId = item.getItemId();
                 if (menuId == R.id.home) {
-                    ChangeFragment(new MedicalHomeFragment());
-                } else if (menuId == R.id.AddProduct) {
                     ChangeFragment(new AddMediProductFragment());
                 } else if (menuId == R.id.viewAllProduct) {
                     ChangeFragment(new ViewAllProductFragment());

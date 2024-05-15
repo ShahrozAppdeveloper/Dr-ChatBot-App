@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.doctorchatbotapp.MedicalStore.Adapter.MediViewProductAdapter;
 import com.example.doctorchatbotapp.MedicalStore.MediModelClass.AddProdcutDetails;
 import com.example.doctorchatbotapp.R;
+import com.example.doctorchatbotapp.User.ModelClass.ConfrimCartDetails;
 import com.example.doctorchatbotapp.databinding.FragmentAddMediProductBinding;
 import com.example.doctorchatbotapp.databinding.FragmentViewMediBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -32,8 +33,8 @@ public class ViewMediFragment extends Fragment {
    private FragmentViewMediBinding binding;
     private FirebaseDatabase database;
     private DatabaseReference reference;
-    ArrayList<AddProdcutDetails> list;
-    ArrayList<AddProdcutDetails> filteredUserList;
+    ArrayList<ConfrimCartDetails> list;
+    ArrayList<ConfrimCartDetails> filteredUserList;
     MediViewProductAdapter adapter;
 
     public ViewMediFragment() {
@@ -82,9 +83,9 @@ public class ViewMediFragment extends Fragment {
             filteredUserList.addAll(list);
         } else {
             // Filter by user name or email
-            for (AddProdcutDetails user : list) {
-                if (user.getProductname().toLowerCase().contains(searchText.toLowerCase())
-                        || user.getProductprice().toLowerCase().contains(searchText.toLowerCase())) {
+            for (ConfrimCartDetails user : list) {
+                if (user.getName().toLowerCase().contains(searchText.toLowerCase())
+                        || user.getPrice().toLowerCase().contains(searchText.toLowerCase())) {
                     filteredUserList.add(user);
                 }
             }
@@ -94,14 +95,15 @@ public class ViewMediFragment extends Fragment {
     }
 
     private void getData(){
-        reference = database.getReference("Medi Product").child("Product Details");
+        reference = database.getReference(
+                "UserCartDetails");
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     for (DataSnapshot snapshot1 : snapshot.getChildren()) {
-                        AddProdcutDetails details = snapshot1.getValue(AddProdcutDetails.class);
+                        ConfrimCartDetails details = snapshot1.getValue(ConfrimCartDetails.class);
                         if (details != null){
                             list.add(details);
                             adapter.notifyDataSetChanged();
