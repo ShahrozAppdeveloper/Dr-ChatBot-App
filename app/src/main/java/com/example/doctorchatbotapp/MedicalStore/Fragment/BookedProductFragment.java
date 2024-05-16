@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.doctorchatbotapp.MedicalStore.Adapter.MeditoStoreAdapter;
 import com.example.doctorchatbotapp.MedicalStore.MediModelClass.AddProdcutDetails;
 import com.example.doctorchatbotapp.R;
 import com.example.doctorchatbotapp.User.UserAdapter.UserToMediAdapter;
@@ -31,7 +32,7 @@ public class BookedProductFragment extends Fragment {
     DatabaseReference reference;
     FirebaseDatabase database;
     ArrayList<AddProdcutDetails> datalist;
-    private UserToMediAdapter adapter;
+    private MeditoStoreAdapter adapter;
     public BookedProductFragment() {
         // Required empty public constructor
     }
@@ -48,7 +49,7 @@ public class BookedProductFragment extends Fragment {
     }
     private void GetMediDetail(){
         datalist = new ArrayList<>();
-        adapter = new UserToMediAdapter(datalist, requireActivity());
+        adapter = new MeditoStoreAdapter(datalist, requireActivity());
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Admin Product").child("Product Details");
