@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/adminhome"
+        android:icon="@drawable/icon_home"
         android:title="Home">
     </item>
     <item android:id="@+id/admindoctorlist"
+        android:icon="@drawable/doctoricon"
         android:title="Doctor">
     </item>
     <item android:id="@+id/adminuserlist"
+        android:icon="@drawable/user_avatar"
         android:title="User">
     </item>
     <item android:id="@+id/adminprofile"
+        android:icon="@drawable/user_avatar"
         android:title="Profile"
         >
     </item>

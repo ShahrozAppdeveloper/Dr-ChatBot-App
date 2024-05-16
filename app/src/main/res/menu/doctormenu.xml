@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/dochome"
+        android:icon="@drawable/icon_home"
         android:title="Home">
     </item>
     <item android:id="@+id/reqdoctor"
+        android:icon="@drawable/user_avatar"
         android:title="User requests">
     </item>
     <item android:id="@+id/chatwithai"
@@ -11,6 +13,7 @@
     </item>
 
     <item android:id="@+id/doctorprofile"
+        android:icon="@drawable/user_avatar"
         android:title="Profile"
         >
 

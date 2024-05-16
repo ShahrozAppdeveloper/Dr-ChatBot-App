@@ -21,22 +21,29 @@ import com.example.doctorchatbotapp.ChatBotModule.ChatBotActivity;
 import com.example.doctorchatbotapp.MedicalStore.Fragment.AddMediProductFragment;
 import com.example.doctorchatbotapp.MedicalStore.Fragment.BookedProductFragment;
 import com.example.doctorchatbotapp.MedicalStore.Fragment.MedicalHomeFragment;
+import com.example.doctorchatbotapp.MedicalStore.Fragment.UpdateProfileMediFragment;
 import com.example.doctorchatbotapp.MedicalStore.Fragment.ViewAllProductFragment;
 import com.example.doctorchatbotapp.R;
+import com.example.doctorchatbotapp.SharedPrefPkg.PrefManager;
 import com.example.doctorchatbotapp.User.UserDashboardActivity;
 import com.example.doctorchatbotapp.User.UserFragment.AvaibleDoctorFragment;
 import com.example.doctorchatbotapp.User.UserFragment.UserHomeFragment;
 import com.example.doctorchatbotapp.User.UserFragment.ViewPagerFragment.UserBookDoctorFragment;
 import com.example.doctorchatbotapp.User.UserFragment.ViewPagerFragment.UserUpdateProfileFragment;
+import com.example.doctorchatbotapp.registration.SignupActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MedicalDashboardActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    private String uid;
+    private FirebaseAuth auth;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medical_dashboard);
+
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -57,7 +64,12 @@ public class MedicalDashboardActivity extends AppCompatActivity {
                     ChangeFragment(new BookedProductFragment());
                 }
                 else if (menuId == R.id.profile) {
-                    ChangeFragment(new UserUpdateProfileFragment());
+                    auth = FirebaseAuth.getInstance();
+                    uid = auth.getCurrentUser().getUid();
+                    PrefManager prefManager = new PrefManager(MedicalDashboardActivity.this);
+                    prefManager.setCurrentstatus("");
+                    auth.signOut();
+                    startActivity(new Intent(MedicalDashboardActivity.this, SignupActivity.class));
                 }
                 else {
 
