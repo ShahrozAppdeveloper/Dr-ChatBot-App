@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".ChatBotModule.ChatBotActivity">
+
     <!--recycler view to display our chats-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVChats"
@@ -20,14 +21,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
         android:weightSum="5">
 
         <!--edit text to enter message-->
         <EditText
             android:id="@+id/idEdtMessage"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="57dp"
             android:layout_weight="4"
+            android:background="@drawable/edittext_bg"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_hint"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
             android:hint="Enter Message" />
 
         <!--button to send message-->
@@ -42,4 +50,5 @@
             app:tint="@color/white" />
 
     </LinearLayout>
+
 </RelativeLayout>

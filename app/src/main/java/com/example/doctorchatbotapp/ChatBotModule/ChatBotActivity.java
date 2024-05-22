@@ -38,8 +38,7 @@ public class ChatBotActivity extends AppCompatActivity {
     private final String USER_KEY = "user";
     private final String BOT_KEY = "bot";
 
-    // creating a variable for
-    // our volley request queue.
+    // creating a variable for our volley request queue.
     private RequestQueue mRequestQueue;
 
     // creating a variable for array list and adapter class.
@@ -67,8 +66,6 @@ public class ChatBotActivity extends AppCompatActivity {
         sendMsgIB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // checking if the message entered
-                // by user is empty or not.
                 if (userMsgEdt.getText().toString().isEmpty()) {
                     // if the edit text is empty display a toast message.
                     Toast.makeText(getApplicationContext(), "Please enter your message..", Toast.LENGTH_SHORT).show();
@@ -84,7 +81,6 @@ public class ChatBotActivity extends AppCompatActivity {
             }
         });
 
-        // on below line we are initializing our adapter class and passing our array list to it.
         messageRVAdapter = new MessageRVAdapter(messageModalArrayList, this);
 
         // below line we are creating a variable for our linear layout manager.
@@ -100,8 +96,29 @@ public class ChatBotActivity extends AppCompatActivity {
     }
 
     private void sendMessage(String userMsg) {
-        // below line is to pass message to our
-        // array list which is entered by the user.
+        // Check for specific medicines and provide details
+        String lowerCaseUserMsg = userMsg.toLowerCase();
+
+        // Check for specific medicines and provide details
+        String botResponse;
+        if (lowerCaseUserMsg.contains("panadol")) {
+            botResponse = "Panadol is a pain relief medicine containing paracetamol. It's used to treat headaches, muscle aches, arthritis, backaches, toothaches, colds, and fevers.";
+        } else if (lowerCaseUserMsg.contains("aspirin")) {
+            botResponse = "Aspirin is used to reduce fever and relieve mild to moderate pain from conditions such as muscle aches, toothaches, common cold, and headaches.";
+        } else if (lowerCaseUserMsg.contains("ibuprofen")) {
+            botResponse = "Ibuprofen is a nonsteroidal anti-inflammatory drug (NSAID) used for relieving pain, helping with fever, and reducing inflammation.";
+        } else {
+            botResponse = null;
+        }
+
+        if (botResponse != null) {
+            messageModalArrayList.add(new MessageModal(userMsg, USER_KEY));
+            messageModalArrayList.add(new MessageModal(botResponse, BOT_KEY));
+            messageRVAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        // below line is to pass message to our array list which is entered by the user.
         messageModalArrayList.add(new MessageModal(userMsg, USER_KEY));
         messageRVAdapter.notifyDataSetChanged();
 
@@ -110,11 +127,10 @@ public class ChatBotActivity extends AppCompatActivity {
         // make sure to add your url.
         String url = "http://api.brainshop.ai/get?bid=181530&key=hTsbhJsmoYzqa0hB&uid=[uid]&msg=" + userMsg;
 
-
         // creating a variable for our request queue.
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
-        // on below line we are making a json object request for a get request and passing our url .
+        // on below line we are making a json object request for a get request and passing our url.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -142,8 +158,7 @@ public class ChatBotActivity extends AppCompatActivity {
             }
         });
 
-        // at last adding json object
-        // request to our queue.
+        // at last adding json object request to our queue.
         queue.add(jsonObjectRequest);
     }
 }
