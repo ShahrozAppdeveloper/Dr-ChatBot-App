@@ -43,14 +43,14 @@ public class DoctorProfileActivity extends AppCompatActivity {
     ImageView imagepick;
     String currentUser;
     ProgressDialog dialog;
-    EditText edname;
+    EditText edname,edphonenumber;
     FirebaseStorage storage;
     Button btncreateprofile;
     private FirebaseAuth mAuth;
     StorageReference storageReference;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    String username;
+    String username,phonenumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +61,7 @@ public class DoctorProfileActivity extends AppCompatActivity {
     private void Ids() {
         imagepick = findViewById(R.id.circleviewID);
         edname = findViewById(R.id.name);
+        edphonenumber = findViewById(R.id.phonenumberID);
         btncreateprofile = findViewById(R.id.btncontinueID);
     }
     private void Clicklistener() {
@@ -74,6 +75,7 @@ public class DoctorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 username = edname.getText().toString().trim();
+                phonenumber = edphonenumber.getText().toString().trim();
                 if (username.isEmpty()
                 ) {
                     Toast.makeText(getApplicationContext(), "Please Fill Details", Toast.LENGTH_SHORT).show();
@@ -141,7 +143,7 @@ public class DoctorProfileActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String imageurl=uri.toString();
-                                            AddPatientDetailToRealtym obj=new AddPatientDetailToRealtym(currentUser,username,imageurl,"notproved","notbook");
+                                            AddPatientDetailToRealtym obj=new AddPatientDetailToRealtym(currentUser,username,imageurl,phonenumber,"notproved","notbook");
                                             databaseReference.child(currentUser).setValue(obj).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {

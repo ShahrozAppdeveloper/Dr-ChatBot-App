@@ -140,7 +140,7 @@ public class UserProfileActivity extends AppCompatActivity {
                                         @Override
                                         public void onSuccess(Uri uri) {
                                             String imageurl = uri.toString();
-                                            AddPatientDetailToRealtym obj = new AddPatientDetailToRealtym(currentUser, username, imageurl,"notprove","notbook");
+                                            AddPatientDetailToRealtym obj = new AddPatientDetailToRealtym(currentUser, username, imageurl,"","notprove","notbook");
                                             databaseReference.child(currentUser).setValue(obj).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {

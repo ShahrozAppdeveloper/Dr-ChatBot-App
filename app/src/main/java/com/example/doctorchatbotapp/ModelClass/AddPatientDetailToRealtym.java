@@ -1,15 +1,16 @@
 package com.example.doctorchatbotapp.ModelClass;
 
 public class AddPatientDetailToRealtym {
-    String userid,username,imageurl,provedstatus,bookingstatus;
+    String userid,username,imageurl,phonenumber,provedstatus,bookingstatus;
 
     public AddPatientDetailToRealtym() {
     }
 
-    public AddPatientDetailToRealtym(String userid, String username, String imageurl, String provedstatus, String bookingstatus) {
+    public AddPatientDetailToRealtym(String userid, String username, String imageurl, String phonenumber, String provedstatus, String bookingstatus) {
         this.userid = userid;
         this.username = username;
         this.imageurl = imageurl;
+        this.phonenumber = phonenumber;
         this.provedstatus = provedstatus;
         this.bookingstatus = bookingstatus;
     }
@@ -52,5 +53,13 @@ public class AddPatientDetailToRealtym {
 
     public void setBookingstatus(String bookingstatus) {
         this.bookingstatus = bookingstatus;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 }

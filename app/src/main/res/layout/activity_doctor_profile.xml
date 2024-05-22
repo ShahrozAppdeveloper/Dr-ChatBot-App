@@ -59,6 +59,20 @@
             android:layout_marginTop="30dp"
             android:textColor="#000000"
             android:textColorHint="@color/hintColor" />
+        <EditText
+            android:id="@+id/phonenumberID"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@drawable/edittext_bg"
+            android:drawableStart="@drawable/user_my"
+            android:drawablePadding="15dp"
+            android:drawableTint="@color/hintColor"
+            android:hint="Phone number"
+            android:inputType="text"
+            android:padding="15dp"
+            android:layout_marginTop="30dp"
+            android:textColor="#000000"
+            android:textColorHint="@color/hintColor" />
 
     </LinearLayout>
 
