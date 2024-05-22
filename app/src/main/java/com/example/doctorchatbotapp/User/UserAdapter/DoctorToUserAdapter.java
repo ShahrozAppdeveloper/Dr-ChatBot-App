@@ -1,6 +1,7 @@
 package com.example.doctorchatbotapp.User.UserAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.doctorchatbotapp.ModelClass.AddPatientDetailToRealtym;
 
 import com.example.doctorchatbotapp.ModelClass.MemberBookingDetails;
 import com.example.doctorchatbotapp.R;
+import com.example.doctorchatbotapp.User.AppointDoctorActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -72,6 +74,7 @@ public class DoctorToUserAdapter extends RecyclerView.Adapter<DoctorToUserAdapte
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             AddTrainnerBookingDetails(trainneID, ID, obj);
+                            context.startActivity(new Intent(context, AppointDoctorActivity.class).putExtra("docName",data.getUsername()).putExtra("docImage",data.getImageurl()));
                         }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -96,7 +99,7 @@ public class DoctorToUserAdapter extends RecyclerView.Adapter<DoctorToUserAdapte
                             mList.remove(data);
                             notifyDataSetChanged();
                             break; // Break after removal to avoid ConcurrentModificationException
-                        }else{
+                        } else {
                             Toast.makeText(context, "No Doctor yet", Toast.LENGTH_SHORT).show();
 
                         }

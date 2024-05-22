@@ -5,4 +5,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="demoParagraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla non euismod orci, ac viverra sem. Mauris at cursus ante. Suspendisse sodales at tellus eget placerat. Donec ut tincidunt ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur et urna dapibus, venenatis eros molestie, venenatis nulla. </string>
 
+    <string name="appoint_doc_des">Doctors are the guardians of health, blending science and compassion to heal and uplift the human spirit</string>
+
 </resources>
