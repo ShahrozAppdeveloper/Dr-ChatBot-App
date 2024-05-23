@@ -4,7 +4,11 @@ import android.R
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -88,6 +92,19 @@ class SignupActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         setContentView(view)
+
+        binding.password.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawableEnd: Drawable? = binding.password.compoundDrawablesRelative[2]
+                drawableEnd?.let {
+                    if (event.rawX >= (binding.password.right - it.bounds.width())) {
+                        togglePasswordVisibility()
+                        return@setOnTouchListener true
+                    }
+                }
+            }
+            false
+        }
     }
 
     private fun clicklistener() {
@@ -210,5 +227,21 @@ class SignupActivity : AppCompatActivity() {
         val wic = WindowInsetsControllerCompat(window, decorView)
         wic.isAppearanceLightStatusBars = true
         window.statusBarColor = ContextCompat.getColor(this, color)
+    }
+
+    private fun togglePasswordVisibility() {
+        val selection = binding.password.selectionEnd
+        if (binding.password.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            binding.password.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.password.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                com.example.doctorchatbotapp.R.drawable.lock, 0, com.example.doctorchatbotapp.R.drawable.eye, 0
+            )
+        } else {
+            binding.password.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.password.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                com.example.doctorchatbotapp.R.drawable.lock, 0, com.example.doctorchatbotapp.R.drawable.eye_hide, 0
+            )
+        }
+        binding.password.setSelection(selection)
     }
 }

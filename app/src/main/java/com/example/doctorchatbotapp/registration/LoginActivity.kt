@@ -2,7 +2,11 @@ package com.example.doctorchatbotapp.registration
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +14,7 @@ import com.example.doctorchatbotapp.Admin.AdminDashboardActivity
 import com.example.doctorchatbotapp.Doctor.DoctorProfileActivity
 import com.example.doctorchatbotapp.MedicalStore.MedicalDashboardActivity
 import com.example.doctorchatbotapp.ModelClass.CurrentStatusDetails
+import com.example.doctorchatbotapp.R
 import com.example.doctorchatbotapp.SharedPrefPkg.PrefManager
 import com.example.doctorchatbotapp.User.UserProfileActivity
 import com.example.doctorchatbotapp.databinding.ActivityLoginBinding
@@ -39,6 +44,19 @@ class LoginActivity : AppCompatActivity() {
 
         clicklistener()
         setContentView(view)
+
+        binding.edpassid.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                val drawableEnd: Drawable? = binding.edpassid.compoundDrawablesRelative[2]
+                drawableEnd?.let {
+                    if (event.rawX >= (binding.edpassid.right - it.bounds.width())) {
+                        togglePasswordVisibility()
+                        return@setOnTouchListener true
+                    }
+                }
+            }
+            false
+        }
 
     }
     private fun clicklistener(){
@@ -124,6 +142,22 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun togglePasswordVisibility() {
+        val selection = binding.edpassid.selectionEnd
+        if (binding.edpassid.transformationMethod == PasswordTransformationMethod.getInstance()) {
+            binding.edpassid.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            binding.edpassid.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                R.drawable.lock, 0, R.drawable.eye, 0
+            )
+        } else {
+            binding.edpassid.transformationMethod = PasswordTransformationMethod.getInstance()
+            binding.edpassid.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                R.drawable.lock, 0, R.drawable.eye_hide, 0
+            )
+        }
+        binding.edpassid.setSelection(selection)
     }
 }
 
